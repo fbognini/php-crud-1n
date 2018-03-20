@@ -35,3 +35,7 @@ a.nav-link {
 .navbar-brand {
 	font-size: 1rem!important;
 }
+
+.form-group label {
+    padding-left: 0px!important;
+}

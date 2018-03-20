@@ -154,7 +154,7 @@
 		</main>
 		<footer class="container">
 			<hr>
-			<p>&copy; Franceso Bognini - I sorgenti sono disponibili su <a href="https://github.com/fbognini/php-crud-db" target="_blank">GitHub</a></p>
+			<p>&copy; Franceso Bognini - I sorgenti sono disponibili su <a href="https://github.com/fbognini/php-crud-1n" target="_blank">GitHub</a></p>
 		</footer>
 	</body>
 </html>

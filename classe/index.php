@@ -34,6 +34,13 @@
 		<link href="../style.css" rel="stylesheet">
 		<script>
 			$( document ).ready(function() {
+				$(".rowclick").click(function(e) {
+					if (!($(e.target).closest('[type="checkbox"]').length > 0)) {
+						$( "#idStudente" ).val($(this).attr('id'));
+						$( "#fstudenti" ).submit().attr('id')
+					} 
+				});
+
 				$("#checkAll").click(function() {
     				$('input:checkbox').not(this).prop('checked', this.checked);
 
@@ -206,12 +213,18 @@
 						})
 					}
 				});
+
+				$('.back').click(function(){
+					parent.history.back();
+					return false;
+				});
 				 
 			});
 		</script>
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            	<i class="material-icons back" style="color: white">arrow_back</i>
 			<div class="container">
 				<div class="navbar-brand">Pannello amministratore</div>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -230,51 +243,51 @@
 		<main role="main">
 		<!-- The Modal -->
 		<div class="modal fade" id="myModal">
-		<div class="modal-dialog">
-		  <div class="modal-content">
-		  
+			<div class="modal-dialog">
+			<div class="modal-content">
+
 			<!-- Modal Header -->
 			<div class="modal-header">
-			  <h4 class="modal-title">Nuovo studente</h4>
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Nuovo studente</h4>
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
-			
+
 			<!-- Modal body -->
 			<div class="modal-body">
-			  <div class="form-group row">
-				<label for="inputCognome" class="col-sm-4 col-form-label">Cognome</label>
-				<div class="col-sm-8">
-				  <input type="text" name="form" class="form-control" id="inputCognome">
-				</div>
-			  </div>
-			  <div class="form-group row">
-				<label for="inputNome" class="col-sm-4 col-form-label">Nome</label>
-				<div class="col-sm-8">
-				  <input type="text" name="form" class="form-control" id="inputNome">
-				</div>
-			  </div>
-			  <div class="form-group row">
-				<label for="inputData" class="col-sm-4 col-form-label">Data di nascita</label>
-				<div class="col-sm-8">
-				  <input type="date" name="form" class="form-control" id="inputData">
-				</div>
-			  </div>
-			  <div class="form-group row">
-				  <label for="inputClasse" class="col-sm-4 col-form-label">Classe</label>
-				<div class="col-sm-8">
-				  <?php echo '<input type="text" class="form-control" id="inputClasse" value="'.$classe.'" disabled>'; ?>
-				</div>
-				</div>
+			<div class="form-group row">
+			<label for="inputCognome" class="col-sm-4 col-form-label">Cognome</label>
+			<div class="col-sm-8">
+			<input type="text" name="form" class="form-control" id="inputCognome">
 			</div>
-			
+			</div>
+			<div class="form-group row">
+			<label for="inputNome" class="col-sm-4 col-form-label">Nome</label>
+			<div class="col-sm-8">
+			<input type="text" name="form" class="form-control" id="inputNome">
+			</div>
+			</div>
+			<div class="form-group row">
+			<label for="inputData" class="col-sm-4 col-form-label">Data di nascita</label>
+			<div class="col-sm-8">
+			<input type="date" name="form" class="form-control" id="inputData">
+			</div>
+			</div>
+			<div class="form-group row">
+			<label for="inputClasse" class="col-sm-4 col-form-label">Classe</label>
+			<div class="col-sm-8">
+			<?php echo '<input type="text" class="form-control" id="inputClasse" value="'.$classe.'" disabled>'; ?>
+			</div>
+			</div>
+			</div>
+
 			<!-- Modal footer -->
 			<div class="modal-footer">
 			<button type="button" class="btn btn-danger" id="add">Aggiungi</button>
 			<!--button type="button" class="btn btn-danger" data-dismiss="modal" id="add">Aggiungi</button-->
 			</div>
-			
-		  </div>
-		</div>
+
+			</div>
+			</div>
 		</div>
         <div class="jumbotron">
 			<div class="container">
@@ -285,15 +298,15 @@
 			<h4>Modifica classe</h4>
 			<div class="form-row">
 				<?php 
-				echo '<input type="hidden" id="idClasse" value="'.$idClasse.'">';
+				echo '<input type="hidden" id="idClasse" name="idClasse" value="'.$idClasse.'">';
 				echo '<div class="col-3"><input type="text" id="editClasse" class="form-control" placeholder="Classe" value="'.$classe.'" required></div>';
 				echo '<div class="col-6"><input type="text" id="editCoordinatore" class="form-control" placeholder="Coordinatore" value="'.$coordinatore.'" required></div>';
 				?>
 				<div class="col-3"><button type="button" class="btn btn-primary w-100" id="edit">Modifica</button></div>
 			</div>
 			<br>
-			<form method="GET" id="fstudenti" class="form-horizontal" action="edit/index.php">
-				<input type="hidden" id="id" name="id"/>
+			<form method="GET" id="fstudenti" class="form-horizontal" action="../studente/index.php">
+				<input type="hidden" id="idStudente" name="idStudente"/>
 			
 				<h4>Studenti</h4>
 				<div class="row">
@@ -302,7 +315,7 @@
 					</div>
 					<div class="group" id="azioni">
 						<button type="button" class="btn btn-primary" id="delete">Elimina</button>
-						<button type="button" class="btn btn-default">Sposta</button>
+						<button type="button" class="btn btn-default" hidden>Sposta</button>
 					</div>
 				</div>
 				<div class="table-responsive">
@@ -320,7 +333,7 @@
 								$nome = htmlentities($row['nome']);
 								$cognome = htmlentities($row['cognome']);
 								// $data = htmlentities(date("d-m-Y", strtotime($row['dataNascita'])));
-								echo '<tr class="pointer" id="'.$idStudente.'"><td><input type="checkbox" name="students"></td><td>'.$i++.'</td><td>'.$idStudente.'</td><td><b>'.$cognome.'</b></td><td>'.$nome.'</td></tr>';
+								echo '<tr class="rowclick pointer" id="'.$idStudente.'"><td><input type="checkbox" name="students"></td><td>'.$i++.'</td><td>'.$idStudente.'</td><td><b>'.$cognome.'</b></td><td>'.$nome.'</td></tr>';
 							}
 							$result->free();
 						}
@@ -333,7 +346,7 @@
 		</main>
 		<footer class="container">
 			<hr>
-			<p>&copy; Franceso Bognini - I sorgenti sono disponibili su <a href="https://github.com/fbognini/php-crud-db" target="_blank">GitHub</a></p>
+			<p>&copy; Franceso Bognini - I sorgenti sono disponibili su <a href="https://github.com/fbognini/php-crud-1n" target="_blank">GitHub</a></p>
 		</footer>
 	</body>
 </html>
