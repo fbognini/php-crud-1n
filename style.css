@@ -1,0 +1,37 @@
+.pointer {
+    cursor: pointer;
+}
+.table th { 
+     border: none !important; 
+}
+
+.editor {
+    text-align: right;
+}
+.editor i {
+    padding-left: 5px;
+}
+
+.rowclick.selected {
+    background: #ffc!important;
+}
+
+#azioni {
+    display: none;
+}
+.row {
+    margin-left: 0px!important;
+}
+.row .group {
+    margin-right: 32px;
+}
+.row .group button {
+    margin-right: 2px;
+}
+a.nav-link {
+	padding: 0px;
+}
+
+.navbar-brand {
+	font-size: 1rem!important;
+}
